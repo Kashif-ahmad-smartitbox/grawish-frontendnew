@@ -155,27 +155,29 @@ const Hero = ({ onContactClick }) => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="flex flex-col sm:flex-row items-start gap-4"
+              className="flex flex-nowrap items-center gap-2 sm:gap-4"
             >
               <motion.button
                 onClick={onContactClick}
-                className="primary-btn px-8 py-4 rounded-full text-white font-semibold text-base flex items-center gap-2 group"
+                className="primary-btn px-4 sm:px-8 py-3 sm:py-4 rounded-full text-white font-semibold text-sm sm:text-base flex items-center gap-2 group whitespace-nowrap"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 data-testid="hero-cta-primary"
               >
-                Start Your Growth Journey
+                <span className="sm:hidden">Start Growth</span>
+                <span className="hidden sm:inline">Start Your Growth Journey</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </motion.button>
               <motion.a
                 href="#services"
-                className="secondary-btn px-8 py-4 rounded-full font-semibold text-base flex items-center gap-2"
+                className="secondary-btn px-4 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-base flex items-center gap-2 whitespace-nowrap"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 data-testid="hero-cta-secondary"
               >
                 <Play className="w-5 h-5" />
-                Explore Services
+                <span className="sm:hidden">Explore</span>
+                <span className="hidden sm:inline">Explore Services</span>
               </motion.a>
             </motion.div>
           </motion.div>
