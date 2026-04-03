@@ -1,8 +1,74 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles, Play, CheckCircle } from 'lucide-react';
 
 const Hero = ({ onContactClick }) => {
+  const outerStats = [
+    { value: '100+', label: 'Brands Scaled', color: 'from-pink-500 to-purple-600' },
+    { value: '1M+', label: 'Impressions', color: 'from-purple-500 to-indigo-600' },
+    { value: '300%+', label: 'Average ROI', color: 'from-fuchsia-500 to-pink-600' },
+    { value: '₹1M+', label: 'Ad Spend', color: 'from-violet-500 to-purple-600' },
+  ];
+
+  const innerOrbitCards = ['Performance-Driven', 'AI-Powered', 'Result-Focused'];
+
+  const getOrbitConfig = (width) => {
+    if (width >= 1536) {
+      return {
+        stageHeight: 700,
+        outerSize: 680,
+        outerRadius: 275,
+        innerSize: 320,
+        innerRadius: 130,
+      };
+    }
+    if (width >= 1280) {
+      return {
+        stageHeight: 640,
+        outerSize: 600,
+        outerRadius: 240,
+        innerSize: 300,
+        innerRadius: 115,
+      };
+    }
+    if (width >= 1024) {
+      return {
+        stageHeight: 560,
+        outerSize: 500,
+        outerRadius: 200,
+        innerSize: 260,
+        innerRadius: 96,
+      };
+    }
+    if (width >= 768) {
+      return {
+        stageHeight: 520,
+        outerSize: 420,
+        outerRadius: 160,
+        innerSize: 230,
+        innerRadius: 85,
+      };
+    }
+    return {
+      stageHeight: 430,
+      outerSize: 300,
+      outerRadius: 112,
+      innerSize: 170,
+      innerRadius: 58,
+    };
+  };
+
+  const [orbitConfig, setOrbitConfig] = useState(() => getOrbitConfig(window.innerWidth));
+
+  useEffect(() => {
+    const handleResize = () => {
+      setOrbitConfig(getOrbitConfig(window.innerWidth));
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <section 
       className="relative min-h-screen flex items-center overflow-hidden pt-20 section-gradient-light"
@@ -120,46 +186,100 @@ const Hero = ({ onContactClick }) => {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="relative"
           >
-            <div className="grid grid-cols-2 gap-6">
-              {[
-                { value: '100+', label: 'Brands Scaled', color: 'from-pink-500 to-purple-600' },
-                { value: '1M+', label: 'Impressions Generated', color: 'from-purple-500 to-indigo-600' },
-                { value: '300%+', label: 'Average ROI', color: 'from-fuchsia-500 to-pink-600' },
-                { value: '₹1M+', label: 'Ad Spend Managed', color: 'from-violet-500 to-purple-600' },
-              ].map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  className="stat-card p-6 text-center"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-                  whileHover={{ y: -5 }}
-                >
-                  <div className={`text-4xl font-heading font-black mb-2 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
-                    {stat.value}
-                  </div>
-                  <div className="text-sm text-gray-500 font-medium">{stat.label}</div>
-                </motion.div>
-              ))}
-            </div>
-
-            <motion.div
-              className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl shadow-purple-500/10 p-4 border border-purple-100"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 1 }}
-              whileHover={{ scale: 1.05 }}
+            <div
+              className="relative flex items-center justify-center"
+              style={{ height: `${orbitConfig.stageHeight}px` }}
             >
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center">
-                  <Sparkles className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <div className="text-sm font-bold text-gray-900">Trusted by 100+ Brands</div>
-                  <div className="text-xs text-gray-500">Join our success stories</div>
-                </div>
-              </div>
-            </motion.div>
+              <div
+                className="absolute rounded-full border border-purple-200/60"
+                style={{ width: `${orbitConfig.outerSize}px`, height: `${orbitConfig.outerSize}px` }}
+              />
+              <div
+                className="absolute rounded-full border border-purple-200/40"
+                style={{ width: `${orbitConfig.innerSize}px`, height: `${orbitConfig.innerSize}px` }}
+              />
+
+              <motion.div
+                className="absolute"
+                style={{ width: `${orbitConfig.outerSize}px`, height: `${orbitConfig.outerSize}px` }}
+                animate={{ rotate: 360 }}
+                transition={{ duration: 34, repeat: Infinity, ease: 'linear' }}
+              >
+                {outerStats.map((stat, index, arr) => {
+                  const angle = (index / arr.length) * 360;
+                  const x = Math.cos((angle * Math.PI) / 180) * orbitConfig.outerRadius;
+                  const y = Math.sin((angle * Math.PI) / 180) * orbitConfig.outerRadius;
+
+                  return (
+                    <motion.div
+                      key={stat.label}
+                      className="absolute"
+                      style={{
+                        left: `calc(50% + ${x}px - 70px)`,
+                        top: `calc(50% + ${y}px - 46px)`,
+                      }}
+                      animate={{ rotate: -360, y: [0, -6, 0] }}
+                      transition={{
+                        rotate: { duration: 34, repeat: Infinity, ease: 'linear' },
+                        y: { duration: 3 + index * 0.4, repeat: Infinity, ease: 'easeInOut' },
+                      }}
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      <div className="stat-card w-[120px] sm:w-[132px] md:w-36 lg:w-40 p-3 md:p-4 text-center shadow-xl shadow-purple-300/20">
+                        <div className={`text-2xl md:text-3xl font-heading font-black mb-1 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
+                          {stat.value}
+                        </div>
+                        <div className="text-[10px] sm:text-xs md:text-sm text-gray-500 font-medium leading-tight">{stat.label}</div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </motion.div>
+
+              <motion.div
+                className="absolute"
+                style={{ width: `${orbitConfig.innerSize}px`, height: `${orbitConfig.innerSize}px` }}
+                animate={{ rotate: -360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+              >
+                {innerOrbitCards.map((item, index, arr) => {
+                  const angle = (index / arr.length) * 360;
+                  const x = Math.cos((angle * Math.PI) / 180) * orbitConfig.innerRadius;
+                  const y = Math.sin((angle * Math.PI) / 180) * orbitConfig.innerRadius;
+
+                  return (
+                    <motion.div
+                      key={item}
+                      className="absolute"
+                      style={{
+                        left: `calc(50% + ${x}px - 62px)`,
+                        top: `calc(50% + ${y}px - 20px)`,
+                      }}
+                      animate={{ rotate: 360, y: [0, -3, 0] }}
+                      transition={{
+                        rotate: { duration: 20, repeat: Infinity, ease: 'linear' },
+                        y: { duration: 2.2 + index * 0.3, repeat: Infinity, ease: 'easeInOut' },
+                      }}
+                      whileHover={{ scale: 1.04 }}
+                    >
+                      <div className="bg-white/95 rounded-xl shadow-lg shadow-purple-500/10 px-3 py-2 border border-purple-100 w-[124px] text-center backdrop-blur-sm">
+                        <div className="text-[10px] sm:text-[11px] md:text-xs font-semibold text-gray-700 leading-tight">
+                          {item}
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </motion.div>
+
+              <motion.div
+                className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center shadow-2xl shadow-purple-500/30"
+                animate={{ scale: [1, 1.06, 1], opacity: [0.95, 1, 0.95] }}
+                transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <Sparkles className="w-9 h-9 text-white" />
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </div>

@@ -54,7 +54,7 @@ const GrawishImpact = () => {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 mb-6">
               <img 
-                src="https://customer-assets.emergentagent.com/job_growth-scale-1/artifacts/zshf7dks_WhatsApp%20Image%202026-04-01%20at%2013.38.06.jpeg" 
+                src="/assets/logos/logo-impact.png" 
                 alt="Grawish Logo" 
                 className="h-8 w-auto"
               />

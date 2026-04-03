@@ -76,7 +76,11 @@ const AIEcosystem = () => {
               <div className="absolute inset-0 w-28 h-28 -m-2 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full blur-2xl opacity-40" 
                    style={{ animation: 'pulse-soft 3s ease-in-out infinite' }} />
               <div className="w-24 h-24 rounded-full bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center shadow-2xl shadow-purple-500/30">
-                <span className="text-white font-heading font-black text-2xl">AI</span>
+                <img
+                  src="/assets/logos/logo-ai.png"
+                  alt="Grawish AI"
+                  className="w-14 h-auto"
+                />
               </div>
             </div>
           </motion.div>

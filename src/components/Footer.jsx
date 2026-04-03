@@ -47,7 +47,7 @@ const Footer = ({ onContactClick }) => {
           <div className="col-span-2 lg:col-span-1">
             <a href="#" className="inline-block mb-6">
               <img 
-                src="https://customer-assets.emergentagent.com/job_growth-scale-1/artifacts/zshf7dks_WhatsApp%20Image%202026-04-01%20at%2013.38.06.jpeg" 
+                src="/assets/logos/logo-wordmark.png" 
                 alt="Grawish" 
                 className="h-12 w-auto"
               />
