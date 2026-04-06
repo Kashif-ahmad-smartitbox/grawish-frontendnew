@@ -76,13 +76,13 @@ const Hero = ({ onContactClick }) => {
     >
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
-          className="absolute top-20 right-10 w-96 h-96 rounded-full"
+          className="absolute top-10 sm:top-20 right-0 sm:right-10 w-48 sm:w-64 md:w-96 h-48 sm:h-64 md:h-96 rounded-full"
           style={{ background: 'radial-gradient(circle, rgba(224, 64, 251, 0.12) 0%, transparent 70%)' }}
           animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.7, 0.5] }}
           transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute bottom-20 left-10 w-80 h-80 rounded-full"
+          className="absolute bottom-10 sm:bottom-20 left-0 sm:left-10 w-40 sm:w-56 md:w-80 h-40 sm:h-56 md:h-80 rounded-full"
           style={{ background: 'radial-gradient(circle, rgba(123, 31, 162, 0.1) 0%, transparent 70%)' }}
           animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.6, 0.4] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}

@@ -36,8 +36,8 @@ const AIEcosystem = () => {
   return (
     <section className="relative py-24 section-dark overflow-hidden" data-testid="ai-ecosystem-section">
       {/* Background Effects */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full" 
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[450px] md:w-[600px] lg:w-[700px] h-[300px] sm:h-[450px] md:h-[600px] lg:h-[700px] rounded-full" 
              style={{ background: 'radial-gradient(circle, rgba(224, 64, 251, 0.15) 0%, rgba(123, 31, 162, 0.08) 40%, transparent 70%)' }} />
       </div>
 
